@@ -5,7 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using BGStudio.BLL.Authetication;
 using BGStudio.BLL.Login;
+using BGStudio.BLL.Masters;
 using BGStudio.DAL.EntityFramework;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -32,6 +34,27 @@ namespace BGStudio.App
             var authOptionsConfiguration = _configuration.GetSection("Auth");
             services.Configure<AuthOptions>(authOptionsConfiguration);
             services.AddTransient<ILoginAppService, LoginAppService>();
+            services.AddTransient<IMastersAppService,MastersAppService>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = true;
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = authOptionsConfiguration.Get<AuthOptions>().Issuer,
+
+                        ValidateAudience = true,
+                        ValidAudience = authOptionsConfiguration.Get<AuthOptions>().Audience,
+
+                        ValidateLifetime = true,
+
+                        IssuerSigningKey = authOptionsConfiguration.Get<AuthOptions>().GetSymmetricSecurityKey(),
+                        ValidateIssuerSigningKey = true,
+
+                    };
+                });
 
             services.AddCors(options =>
                 options.AddDefaultPolicy(
@@ -52,6 +75,8 @@ namespace BGStudio.App
 
             app.UseRouting();
             app.UseCors();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
