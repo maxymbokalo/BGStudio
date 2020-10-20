@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BGStudio.BLL\BGStudio.BLL.csproj" />
     <ProjectReference Include="..\BGStudio.DAL\BGStudio.DAL.csproj" />
-    <ProjectReference Include="..\ConsoleApp2\BGStudio.DAL.csproj" />
   </ItemGroup>
 
 </Project>

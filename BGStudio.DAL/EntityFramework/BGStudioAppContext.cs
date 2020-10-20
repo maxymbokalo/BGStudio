@@ -6,7 +6,8 @@ namespace BGStudio.DAL.EntityFramework
 {
     public class BGStudioAppContext : DbContext
     {
-        public DbSet<Account> Accounts { get; set; }
+        public DbSet<AccountERD> Accounts { get; set; }
+        public DbSet<UserERD> Users { get; set; }
         public BGStudioAppContext(DbContextOptions options) : base(options)
         {
         }
@@ -15,31 +16,50 @@ namespace BGStudio.DAL.EntityFramework
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>().HasData(
-                new User
+            modelBuilder.Entity<UserERD>()
+                .HasOne(u => u.Account)
+                .WithOne(a => a.User)
+                .HasForeignKey<AccountERD>(a => a.UserId);
+
+            modelBuilder.Entity<UserERD>().HasData(
+                new UserERD
                 {
                     Id = 1,
                     Name = "TestName",
-                    UserName = "TestUserName",
                     SurName = "TestSurName",
-                    EmailAddress = "test@gmail.com",
+                    Age = 21,
                     PhoneNumber = "041414131",
                     IsAdmin = false,
-                    Password = "test",
                     RoleId = 2,
                     IsDeleted = false
                 },
-                new User
+                new UserERD
                 {
                     Id = 2,
                     Name = "Admin",
-                    UserName = "Admin",
                     SurName = "Admin",
-                    EmailAddress = "admin@gmail.com",
+                    Age = 21,
                     PhoneNumber = "066161661",
                     IsAdmin = false,
-                    Password = "admin",
                     RoleId = 1,
+                    IsDeleted = false
+                });
+
+            modelBuilder.Entity<AccountERD>().HasData(
+                new AccountERD
+                {
+                    Id = 1,
+                    EmailAddress = "test@gmail.com",
+                    Password = "test",
+                    UserId = 1,
+                    IsDeleted = false
+                },
+                new AccountERD
+                {
+                    Id = 2,
+                    EmailAddress = "admin@gmail.com",
+                    Password = "admin",
+                    UserId = 2,
                     IsDeleted = false
                 });
         }
