@@ -26,7 +26,8 @@ namespace BGStudio.DAL.EntityFramework
                     PhoneNumber = "041414131",
                     IsAdmin = false,
                     Password = "test",
-                    RoleId = 2
+                    RoleId = 2,
+                    IsDeleted = false
                 },
                 new User
                 {
@@ -38,7 +39,8 @@ namespace BGStudio.DAL.EntityFramework
                     PhoneNumber = "066161661",
                     IsAdmin = false,
                     Password = "admin",
-                    RoleId = 1
+                    RoleId = 1,
+                    IsDeleted = false
                 });
         }
     }

@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BGStudio.DAL\BGStudio.DAL.csproj" />
     <ProjectReference Include="..\ConsoleApp2\BGStudio.DAL.csproj" />
   </ItemGroup>
 
