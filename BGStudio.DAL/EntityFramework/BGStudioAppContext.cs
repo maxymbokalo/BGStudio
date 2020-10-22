@@ -36,6 +36,28 @@ namespace BGStudio.DAL.EntityFramework
                 new UserERD
                 {
                     Id = 2,
+                    Name = "Juli",
+                    SurName = "Maea",
+                    Age = 31,
+                    PhoneNumber = "12313515",
+                    IsAdmin = false,
+                    RoleId = 2,
+                    IsDeleted = false
+                },
+                new UserERD
+                {
+                    Id = 3,
+                    Name = "Kate",
+                    SurName = "Qweqr",
+                    Age = 22,
+                    PhoneNumber = "166616112",
+                    IsAdmin = false,
+                    RoleId = 2,
+                    IsDeleted = false
+                },
+                new UserERD
+                {
+                    Id = 4,
                     Name = "Admin",
                     SurName = "Admin",
                     Age = 21,

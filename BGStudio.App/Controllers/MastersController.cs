@@ -19,9 +19,8 @@ namespace BGStudio.App.Controllers
         {
             _masterAppService = mastersAppService;
         }
-        [Authorize]
         [HttpGet]
-        [Route("getmasters")]
+        [Route("")]
         public IActionResult GetMasters()
         {
             var masters = _masterAppService.GetAllMasters();

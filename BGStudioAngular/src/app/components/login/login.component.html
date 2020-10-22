@@ -1,0 +1,17 @@
+<div>
+    <mat-card *ngIf= '!isLoggedIn'>
+        <mat-form-field class="login-form-field">
+          <mat-label>EmailAddress</mat-label>
+          <input type="email" matInput placeholder="user@email.com" #email>
+        </mat-form-field>
+        <mat-form-field class="login-form-field">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput  #password>
+        </mat-form-field>
+        <button mat-flat-button color="primary" (click)='login(email.value,password.value)'>Login</button>
+      </mat-card>
+      <mat-card>
+        <button mat-flat-button color="primary" (click)='logout()'>Logout</button>
+      </mat-card>
+</div>
+
