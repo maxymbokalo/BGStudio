@@ -13,6 +13,7 @@ namespace BGStudio.App.Models
         public int RoleId { get; set; }
         public bool IsDeleted { get; set; }
 
+        public int AccountId { get; set; }
         public AccountERD Account { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BGStudio.BLL.Authetication;
 using BGStudio.BLL.Login;
 using BGStudio.BLL.Masters;
+using BGStudio.BLL.Registration;
 using BGStudio.DAL.EntityFramework;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -34,6 +35,7 @@ namespace BGStudio.App
             var authOptionsConfiguration = _configuration.GetSection("Auth");
             services.Configure<AuthOptions>(authOptionsConfiguration);
             services.AddTransient<ILoginAppService, LoginAppService>();
+            services.AddTransient<IRegistrationAppService, RegistrationAppService>();
             services.AddTransient<IMastersAppService,MastersAppService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -71,6 +73,10 @@ namespace BGStudio.App
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
             }
 
             app.UseRouting();

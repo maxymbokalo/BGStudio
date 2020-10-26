@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using BGStudio.BLL.Authetication;
 using BGStudio.BLL.Login;
 using BGStudio.BLL.Login.Dto;
+using BGStudio.BLL.Registration;
+using BGStudio.BLL.Registration.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -16,10 +18,12 @@ namespace BGStudio.App.Controllers
     public class AuthController : ControllerBase
     {
         private ILoginAppService _loginAppService;
+        private IRegistrationAppService _registrationAppService;
 
-        public AuthController(ILoginAppService loginAppService)
+        public AuthController(ILoginAppService loginAppService, IRegistrationAppService registrationAppService)
         {
             _loginAppService = loginAppService;
+            _registrationAppService = registrationAppService;
         }
         [Route("login")]
         [HttpPost]
@@ -34,7 +38,17 @@ namespace BGStudio.App.Controllers
             {
                 access_token = token
             });
+        }
+        [Route("register")]
+        [HttpPost]
+        public IActionResult Registration([FromBody] NewUserDto requestNewUserDto)
+        {
+            var registrationExceptions = _registrationAppService.CheckEmailAndPhoneForDuplicates(requestNewUserDto);
+            if (registrationExceptions.Count > 0)
+                return BadRequest(registrationExceptions);
 
+            _registrationAppService.RegisterNewUser(requestNewUserDto);
+            return Ok(requestNewUserDto);
         }
     }
 }

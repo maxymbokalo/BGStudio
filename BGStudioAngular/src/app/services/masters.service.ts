@@ -11,7 +11,7 @@ import { User } from '../models/user';
 export class MastersService {
 
   GetMasters():Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/masters/getmasters`);
+    return this.http.get<User[]>(`${this.apiUrl}/masters`);
   }
   constructor(
     private http: HttpClient,

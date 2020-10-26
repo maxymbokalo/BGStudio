@@ -31,7 +31,8 @@ namespace BGStudio.DAL.EntityFramework
                     PhoneNumber = "041414131",
                     IsAdmin = false,
                     RoleId = 2,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    AccountId = 1
                 },
                 new UserERD
                 {
@@ -42,7 +43,8 @@ namespace BGStudio.DAL.EntityFramework
                     PhoneNumber = "12313515",
                     IsAdmin = false,
                     RoleId = 2,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    AccountId = 2
                 },
                 new UserERD
                 {
@@ -53,7 +55,8 @@ namespace BGStudio.DAL.EntityFramework
                     PhoneNumber = "166616112",
                     IsAdmin = false,
                     RoleId = 2,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    AccountId = 3
                 },
                 new UserERD
                 {
@@ -62,27 +65,43 @@ namespace BGStudio.DAL.EntityFramework
                     SurName = "Admin",
                     Age = 21,
                     PhoneNumber = "066161661",
-                    IsAdmin = false,
+                    IsAdmin = true,
                     RoleId = 1,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    AccountId = 4
                 });
 
             modelBuilder.Entity<AccountERD>().HasData(
                 new AccountERD
                 {
                     Id = 1,
-                    EmailAddress = "test@gmail.com",
-                    Password = "test",
+                    EmailAddress = "test1@gmail.com",
+                    Password = "test1",
                     UserId = 1,
-                    IsDeleted = false
+                    IsDeleted = false,
                 },
                 new AccountERD
                 {
                     Id = 2,
+                    EmailAddress = "test2@gmail.com",
+                    Password = "test2",
+                    UserId = 2,
+                    IsDeleted = false,
+                },
+                new AccountERD
+                {
+                    Id = 3,
+                    EmailAddress = "test3@gmail.com",
+                    Password = "test3",
+                    UserId = 3,
+                    IsDeleted = false,
+                }, new AccountERD
+                {
+                    Id = 4,
                     EmailAddress = "admin@gmail.com",
                     Password = "admin",
-                    UserId = 2,
-                    IsDeleted = false
+                    UserId = 4,
+                    IsDeleted = false,
                 });
         }
     }

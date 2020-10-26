@@ -9,4 +9,11 @@ import { AUTH_API_URL } from './app-injection-token';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  constructor(private authService:AuthService) {
+    
+  }
+  isLoggedIn():Boolean{
+    return this.authService.isAuthenticated();
+  }
 }
